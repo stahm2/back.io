@@ -14,3 +14,37 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+@font-face{
+	font-family: Roboto_Bold;
+	src: url(../assets/font/Roboto-Bold.ttf) format('truetype');
+	font-weight: 700;
+}
+
+@font-face{
+	font-family: Roboto_Regular;
+	src: url(../assets/font/Roboto-Regular.ttf) format('truetype');
+	font-weight: 400;
+}
+
+body{
+  font-family: Roboto_Regular;
+}
+h2{
+	font-family: Roboto_Bold;
+	font-size: 18pt !important;
+}
+
+h3{
+	font-family: Roboto_Bold;
+	font-size: 15pt !important;
+}
+
+p{
+	font-family: Roboto_Regular;
+	font-weight: 12pt !important;
+}
+
+ion-label{
+	font-family: Roboto_Regular;
+	font-weight: 12pt;
+}
