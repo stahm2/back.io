@@ -8,6 +8,8 @@ import { TipPage } from '../pages/tip/tip';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import {SensorPage} from '../pages/sensor/sensor';
+import {TipDetailPage} from '../pages/tip-detail/tip-detail';
+import {ExerciseDetailPage} from '../pages/exercise-detail/exercise-detail';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -19,6 +21,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     DiaryPage,
     HomePage,
     SensorPage,
+    TipDetailPage,
+    ExerciseDetailPage,
     TabsPage
   ],
   imports: [
@@ -32,6 +36,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     TipPage,
     HomePage,
     SensorPage,
+    TipDetailPage,
+    ExerciseDetailPage,
     TabsPage
   ],
   providers: [
