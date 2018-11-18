@@ -1,5 +1,5 @@
 {
-  "name": "backIo",
-  "integrations": {},
-  "type": "ionic-angular"
+	"name": "back.io",
+	"integrations": {},
+	"type": "ionic-angular"
 }
