@@ -10,23 +10,23 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-sensor',
-  templateUrl: 'sensor.html',
+	selector: 'page-sensor',
+	templateUrl: 'sensor.html',
 })
 export class SensorPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
+	constructor(public navCtrl: NavController, public navParams: NavParams) {
+	}
 
-  connect() {
-    // put some code here
+	connect() {
+		// put some code here
 
-    document.getElementById('explain').textContent = 'Sensor wird verbunden';
-    document.getElementById('connectionBtn').hidden = true;
-  }
+		document.getElementById('explain').textContent = 'Sensor wird verbunden';
+		document.getElementById('connectionBtn').hidden = true;
+	}
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad SensorPage');
-  }
+	ionViewDidLoad() {
+		console.log('ionViewDidLoad SensorPage');
+	}
 
 }
