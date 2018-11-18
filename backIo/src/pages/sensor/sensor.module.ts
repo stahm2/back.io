@@ -3,11 +3,11 @@ import { IonicPageModule } from 'ionic-angular';
 import { SensorPage } from './sensor';
 
 @NgModule({
-  declarations: [
-    SensorPage,
-  ],
-  imports: [
-    IonicPageModule.forChild(SensorPage),
-  ],
+	declarations: [
+		SensorPage,
+	],
+	imports: [
+		IonicPageModule.forChild(SensorPage),
+	],
 })
-export class SensorPageModule {}
+export class SensorPageModule { }
