@@ -14,7 +14,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { SensorProvider } from '../providers/sensor/sensor';
 
 @NgModule({
-<<<<<<< master
 	declarations: [
 		MyApp,
 		TipPage,
@@ -39,36 +38,8 @@ import { SensorProvider } from '../providers/sensor/sensor';
 	providers: [
 		StatusBar,
 		SplashScreen,
-		{ provide: ErrorHandler, useClass: IonicErrorHandler }
+		{ provide: ErrorHandler, useClass: IonicErrorHandler },
+		SensorProvider
 	]
-=======
-  declarations: [
-    MyApp,
-    TipPage,
-    DiaryPage,
-    HomePage,
-    SensorPage,
-    TabsPage
-  ],
-  imports: [
-    BrowserModule,
-    IonicModule.forRoot(MyApp)
-  ],
-  bootstrap: [IonicApp],
-  entryComponents: [
-    MyApp,
-    DiaryPage,
-    TipPage,
-    HomePage,
-    SensorPage,
-    TabsPage
-  ],
-  providers: [
-    StatusBar,
-    SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    SensorProvider
-  ]
->>>>>>> Generated provider for the sensor service
 })
 export class AppModule { }
