@@ -6,5 +6,8 @@
 	"type": "ionic-angular",
 	"node": {
 		"fs": "empty"
-	}
+	},
+	"typeRoots": [
+		"node_modules/@types"
+	]
 }
