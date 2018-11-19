@@ -1,7 +1,10 @@
 {
-  "name": "back.io",
-  "integrations": {
-    "cordova": {}
-  },
-  "type": "ionic-angular"
+	"name": "back.io",
+	"integrations": {
+		"cordova": {}
+	},
+	"type": "ionic-angular",
+	"node": {
+		"fs": "empty"
+	}
 }
