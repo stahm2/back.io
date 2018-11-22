@@ -12,7 +12,7 @@ export class SensorProvider {
 	];
 
 	constructor() {
-		this.sensor = require('../../node_modules/node-metawear/src/device');
+		this.sensor = require('node-metawear/src/device');
 		console.log('sensor service initialized');
 	}
 
@@ -33,7 +33,7 @@ export class SensorProvider {
 	}
 	*/
 	public discoverAll() {
-		this.sensor.discover(function (device) {
+		this.sensor.discover((device) => {
 			console.log('discovered device ', device.address);
 
 			device.on('disconnect', function () {

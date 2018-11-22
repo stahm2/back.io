@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { SensorProvider } from '../../providers/sensor/sensor';
 
 /**
  * Generated class for the SensorPage page.
@@ -14,13 +15,14 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 	templateUrl: 'sensor.html',
 })
 export class SensorPage {
+	sensorProvider: SensorProvider;
 
-	constructor(public navCtrl: NavController, public navParams: NavParams) {
+	constructor(sensorProvider: SensorProvider, public navCtrl: NavController, public navParams: NavParams) {
+		this.sensorProvider = sensorProvider;
 	}
 
 	connect() {
-		// put some code here
-
+		this.sensorProvider.discoverAll();
 		document.getElementById('explain').textContent = 'Sensor wird verbunden';
 		document.getElementById('connectionBtn').hidden = true;
 	}
