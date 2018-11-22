@@ -30,18 +30,6 @@
 </head>
 
 <body>
-	<script>
-		const exists = function (dir) {
-			if (dir == 'package.json' || dir == 'node_modules') {
-				console.log('exists() function hack triggered.');
-				return true;
-			}
-			console.log('separate dir has been checked. must be implemented in development.');
-			return false;
-		}
-		exists('package.json');
-	</script>
-
 	<!-- Ionic's root component and where the app will load -->
 	<ion-app></ion-app>
 
