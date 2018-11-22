@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Metawear } from 'metawear';
+import { Device } from 'node-metawear/src/device';
 
 @Injectable()
 export class SensorProvider {
+	sensor: Device;
 	availableDevices = [];
 	availableAddresses = [
 		// MAC-Addresses for testing
@@ -10,11 +11,12 @@ export class SensorProvider {
 		'E4:A2:16:63:D9:E1'
 	];
 
-	constructor(private sensor: Metawear) {
+	constructor() {
+		this.sensor = require('../../node_modules/node-metawear/src/device');
 		console.log('sensor service initialized');
 	}
 
-	public connectDeviceByAddress(address: string): Metawear {
+	public connectDeviceByAddress(address: string): Device {
 		this.sensor.discoverByAddress(address, device => {
 			console.log('discovered ' + device.address);
 			device.connectAndSetUp(device => {
@@ -25,8 +27,34 @@ export class SensorProvider {
 		});
 	}
 
+	/*
 	public discoverAll() {
 		this.sensor.discoverAll(this.onDiscover);
+	}
+	*/
+	public discoverAll() {
+		this.sensor.discover(function (device) {
+			console.log('discovered device ', device.address);
+
+			device.on('disconnect', function () {
+				console.log('we got disconnected! :( ');
+			});
+
+			device.connectAndSetup(function (error) {
+				console.log('were connected!');
+
+				var gyro = new device.Gyro(device);
+
+				gyro.config.setRate(1600);
+				gyro.config.setRange(125);
+				gyro.commitConfig();
+
+				gyro.enable();
+				gyro.onChange(function (x, y, z) {
+					console.log("x:", x, "\t\ty:", y, "\t\tz:", z);
+				});
+			});
+		});
 	}
 
 	private onDiscover(device) {
@@ -40,7 +68,7 @@ export class SensorProvider {
 		if (this.availableAddresses.length == this.availableDevices.length) {
 			this.sensor.stopDiscoverAll(this.onDiscover);
 			// stream accelerometer for a short amount of time
-			setTimeout(function() {
+			setTimeout(function () {
 				console.log('discover complete');
 				this.availableDevices.forEach(device => {
 					this.startAccelStream(device);

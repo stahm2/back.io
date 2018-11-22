@@ -1,5 +1,13 @@
 {
 	"name": "back.io",
-	"integrations": {},
-	"type": "ionic-angular"
+	"integrations": {
+		"cordova": {}
+	},
+	"type": "ionic-angular",
+	"node": {
+		"fs": "empty"
+	},
+	"typeRoots": [
+		"node_modules/@types"
+	]
 }
