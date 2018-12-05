@@ -1,9 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Device } from 'node-metawear/src/device';
+import * as sensor from 'node-metawear/src/device';
+import * as http from 'http';
+
 
 @Injectable()
 export class SensorProvider {
-	sensor: Device;
+	port = 8082;
+	currentDevice = null;
+
 	availableDevices = [];
 	availableAddresses = [
 		// MAC-Addresses for testing
@@ -12,12 +16,12 @@ export class SensorProvider {
 	];
 
 	constructor() {
-		this.sensor = require('node-metawear/src/device');
+		console.log(http);
 		console.log('sensor service initialized');
 	}
 
-	public connectDeviceByAddress(address: string): Device {
-		this.sensor.discoverByAddress(address, device => {
+	public connectDeviceByAddress(address: string) {
+		sensor.discoverByAddress(address, device => {
 			console.log('discovered ' + device.address);
 			device.connectAndSetUp(device => {
 				console.log('connected ' + device.address);
@@ -29,32 +33,99 @@ export class SensorProvider {
 
 	/*
 	public discoverAll() {
-		this.sensor.discoverAll(this.onDiscover);
+		sensor.discoverAll(this.onDiscover);
 	}
 	*/
 	public discoverAll() {
-		this.sensor.discover((device) => {
-			console.log('discovered device ', device.address);
-
+		sensor.discover(function (device) {
+			console.log('discovered device', device.address);
 			device.on('disconnect', function () {
 				console.log('we got disconnected! :( ');
 			});
 
 			device.connectAndSetup(function (error) {
-				console.log('were connected!');
-
-				var gyro = new device.Gyro(device);
-
-				gyro.config.setRate(1600);
-				gyro.config.setRange(125);
-				gyro.commitConfig();
-
-				gyro.enable();
-				gyro.onChange(function (x, y, z) {
-					console.log("x:", x, "\t\ty:", y, "\t\tz:", z);
-				});
+				console.log('we are ready');
+				this.currentDevice = device;
 			});
 		});
+
+		console.log('start server on http://localhost:' + this.port);
+
+		http.createServer(function (request, response) {
+			function writeResponse(code, body) {
+				response.writeHead(code, { "Content-Type": "text/plain" });
+				response.write(body);
+				response.end();
+			}
+
+			console.log('HTTP request - ' + request.url);
+
+			if (!this.currentDevice) {
+				writeResponse(503, "metawear not ready yet");
+				console.error('Device not ready..');
+				return;
+			}
+
+			switch (request.url) {
+				case '/':
+				case '/info/':
+					writeResponse(200, 'OK');
+					break;
+				case '/temperature/':
+					var temperature = new this.currentDevice.Temperature(
+						this.currentDevice,
+						this.currentDevice.Temperature.ON_BOARD_THERMISTOR
+					);
+
+					temperature.getValue(function (value) {
+						writeResponse(200, "" + value);
+					});
+					break;
+				case '/pressure/':
+					var barometer = new this.currentDevice.Barometer(this.currentDevice);
+
+					barometer.enablePressure(function (value) {
+						writeResponse(200, "" + value);
+						barometer.disable();
+					});
+					break;
+				case '/brightness/':
+					var light = new this.currentDevice.AmbiantLight(this.currentDevice);
+
+					light.enable(function (value) {
+						writeResponse(200, "" + value);
+						light.disable();
+					});
+					break;
+				default:
+					writeResponse(404, "Route not found");
+			}
+		}).listen(this.port);
+
+		/*
+				sensor.discover((device) => {
+					console.log('discovered device ', device.address);
+
+					device.on('disconnect', function () {
+						console.log('we got disconnected! :( ');
+					});
+
+					device.connectAndSetup(function (error) {
+						console.log('were connected!');
+
+						var gyro = new device.Gyro(device);
+
+						gyro.config.setRate(1600);
+						gyro.config.setRange(125);
+						gyro.commitConfig();
+
+						gyro.enable();
+						gyro.onChange(function (x, y, z) {
+							console.log("x:", x, "\t\ty:", y, "\t\tz:", z);
+						});
+					});
+				});
+				*/
 	}
 
 	private onDiscover(device) {
@@ -66,7 +137,7 @@ export class SensorProvider {
 		});
 		// Complete discovery after finishing scanning for devices
 		if (this.availableAddresses.length == this.availableDevices.length) {
-			this.sensor.stopDiscoverAll(this.onDiscover);
+			sensor.stopDiscoverAll(this.onDiscover);
 			// stream accelerometer for a short amount of time
 			setTimeout(function () {
 				console.log('discover complete');
@@ -84,24 +155,24 @@ export class SensorProvider {
 				process.exit(1);
 			}
 			// Set the max range of the accelerometer /TESTING!)
-			this.sensor.mbl_mw_acc_set_range(device.board, 8.0);
-			this.sensor.mbl_mw_acc_write_acceleration_config(device.board);
-			var accSignal = this.sensor.mbl_mw_acc_get_acceleration_data_signal(device.board);
-			this.sensor.mbl_mw_datasignal_subscribe(accSignal, null, this.sensor.FnVoid_VoidP_DataP.toPointer(function gotTimer(context, dataPtr) {
+			sensor.mbl_mw_acc_set_range(device.board, 8.0);
+			sensor.mbl_mw_acc_write_acceleration_config(device.board);
+			var accSignal = sensor.mbl_mw_acc_get_acceleration_data_signal(device.board);
+			sensor.mbl_mw_datasignal_subscribe(accSignal, null, sensor.FnVoid_VoidP_DataP.toPointer(function gotTimer(context, dataPtr) {
 				var data = dataPtr.deref();
 				var pt = data.parseValue();
 				console.log(pt.x, pt.y, pt.z);
 			}));
-			this.sensor.mbl_mw_acc_enable_acceleration_sampling(device.board);
-			this.sensor.mbl_mw_acc_start(device.board);
+			sensor.mbl_mw_acc_enable_acceleration_sampling(device.board);
+			sensor.mbl_mw_acc_start(device.board);
 
 			// Stop after 5 seconds
 			setTimeout(function () {
 				// Stop the stream
-				this.sensor.mbl_mw_acc_stop(device.board);
-				this.sensor.mbl_mw_acc_disable_acceleration_sampling(device.board);
-				this.sensor.mbl_mw_datasignal_unsubscribe(accSignal);
-				this.sensor.mbl_mw_debug_disconnect(device.board);
+				sensor.mbl_mw_acc_stop(device.board);
+				sensor.mbl_mw_acc_disable_acceleration_sampling(device.board);
+				sensor.mbl_mw_datasignal_unsubscribe(accSignal);
+				sensor.mbl_mw_debug_disconnect(device.board);
 			}, 5000);
 		});
 	}
