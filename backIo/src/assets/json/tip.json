@@ -1,0 +1,42 @@
+{
+  "tip":[
+    {
+      "title": "Reflexionen und Blendungen vermeiden",
+      "text": "Stellen Sie Tisch und Bildschirm so auf, dass das Licht von der Seite einfällt (Bildschirm im 90°-Winkel zum Fenster). Arbeiten Sie nicht mit heruntergelassenen Storen. Verwenden Sie stattdessen Folienrollos, die sich vom unteren Fensterrahmen nach oben ziehen lassen, oder Lamellenvorhänge mit vertikalen Streifen. Damit haben Sie ohne Blendung Sicht ins Freie. ",
+      "img": "../imgs/reflexion.jepg"
+    },
+    {
+      "title": "Stuhl einstellen",
+      "text": "Stellen Sie die Sitzhöhe so ein, dass Ihre Oberschenkel bis auf wenige Zentimeter auf der Sitzfläche aufliegen. Ihre Füsse haben guten Bodenkontakt. Zwischen Ober- und Unterschenkel sowie zwischen Oberschenkel und Rumpf ergibt sich ein Winkel von 90° oder etwas grösser. Der Abstand zwischen der Kante der Sitzfläche und den Kniekehlen sollte mindestens zwei Finger breit sein.",
+      "img": "../imgs/chair.jepg",
+      "subtitle": "Rückenlehne",
+      "text2": "Ein guter Stuhl verfügt über eine höhen- und neigungsverstellbare Rückenlehne mit Lendenbausch und Synchronmechanik (Wippmechanik der Rückenlehne). Schalten Sie die Rückenlehne für dynamisches Sitzen frei und achten Sie darauf, dass der Rücken die Rückenlehne mit leichtem Druck berührt."
+    },
+    {
+      "title": "Tischhöhe anpassen",
+      "text": "Sorgen Sie zuerst dafür, dass der Platz unter dem Tisch frei ist und für die Beine reichlich Bewegungsraum bleibt. Passen Sie nun die Tischhöhe nach der «Ellbogenregel» an: Ellbogenhöhe = Tischhöhe plus Tastaturhöhe. Wenn Ihr Tisch in der Höhe nicht verstellbar ist, stellen Sie die Stuhlhöhe so ein, dass die Ellbogenregel erfüllt ist. Kleine Personen benötigen in diesem Fall meistens eine Fussstütze, damit die Füsse nicht in der Luft hängen. ",
+      "img": "../imgs/table.jpeg"
+    },
+    {
+      "title": "Bildschirm einrichten",
+      "text": " Positionieren Sie den Bildschirm gerade vor sich, in ca. 70 bis 90 cm Sehdistanz. Die Bildschirmoberkante liegt ca. 10 cm (eine Handbreite) unter der Augenhöhe. Neigen Sie den Bildschirm so, dass Ihr Blick senkrecht darauf fällt. Wenn Sie kleine Schriften nicht mehr ohne Anstrengung lesen können, vergrössern Sie die Darstellung auf dem Bildschirm mit der Zoom-Funktion.",
+      "img": "../imgs/monitor.jpeg"
+
+    },
+    {
+      "title": "Arbeiten mit zwei Bildschirmen",
+      "text": "Wenn Sie hauptsächlich mit einem Bildschirm arbeiten (und nur ab und zu mit beiden), dann stellen Sie den Hauptbildschirm zentral vor sich auf und den Zusatzbildschirm seitlich in gleicher Sehdistanz. Verwenden Sie beide Bildschirme gleichwertig (und schieben die Fenster nach Bedarf auf den einen oder anderen Bildschirm), dann ist eine symmetrische Anordnung vorteilhaft.",
+      "img": "../imgs/two_monitor.jpeg"
+    },
+    {
+      "title": "Tastatur und Dokumente platzieren",
+      "text": "Positionieren Sie die Tastatur gerade vor sich. Falls Sie mit Papierdokumenten arbeiten, legen Sie diese zwischen Tastatur und Bildschirm, am besten auf eine geneigte Dokumentenauflage (Höhe hinten ca. 7 cm).",
+      "img": "../imgs/keyboard.jpeg"
+    },
+    {
+      "title": "PC-Brille tragen",
+      "text": "Übliche Gleitsicht- oder Lesebrillen sind für die Bildschirmarbeit ungeeignet. Um scharf zu sehen, nähert man sich dem Bildschirm und legt den Kopf in den Nacken. Dies führt zu Verspannungen. PC-Brillen hingegen bieten auf Bildschirmdistanz ein optimales Sehfeld und ermöglichen eine natürliche Körperhaltung.",
+      "img": "../imgs/glasses.jpeg"
+    }
+  ]
+}
